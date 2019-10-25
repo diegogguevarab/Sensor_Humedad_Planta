@@ -1,18 +1,13 @@
 #include <ESP8266WiFi.h>
-
-
 //WIFI Datos y Dweet.io
 const char* ssid = "Movistar_15683961";
 const char* password = "0096769669";
 const char* host= "dweet.io";
 String sensor="ElSensor"
-
 //Variables Sensor
 String arrayVariableNames[]={"humedad"}; // Nombre de nuestro(s) sensores(s)
 int arrayVariableValues[]={"25"}; // Valor de nuestro sensor o sensores
 int numberVariables=sizeof(arrayVariableValues)/sizeof(arrayVariableValues[0]); // tamaño del argumento para cada variable
-
-
 void setup() { 
   Serial.begin(9600); 
   // Iniciar conexion WIFI
@@ -39,9 +34,7 @@ void setup() {
     } 
   Serial.println(F("Config lista"));  
 }
-
 void loop() {
-
   if (!client.connected()) {
     reconnect();
   }

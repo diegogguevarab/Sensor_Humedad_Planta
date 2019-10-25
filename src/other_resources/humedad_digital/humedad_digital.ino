@@ -8,7 +8,6 @@ void setup() {
 }
 
 void loop() {
-
   /*
    * High == Dry
    * Low == Wet
@@ -19,6 +18,5 @@ void loop() {
     Serial.println("Wet");
   else
     Serial.println("Error");
-
   delay(1000);
 }

@@ -1,6 +1,4 @@
 #include <ESP8266WiFi.h>
-
-
 /**
  * Datos del sensor de humedad YL-69
  **/
@@ -14,9 +12,6 @@ String arrayVariableNames[]={"Humedad","LedRojo","LedVerde","Bomba"};
 int arrayVariableValues[]={10,0,0,0};
 
 int numberVariables=sizeof(arrayVariableValues)/sizeof(arrayVariableValues[0]);
-
-
-
 /**
  * Parametros para la red WIFI local y la URI Dweet.io
  **/
@@ -24,28 +19,21 @@ const char* ssid = "LaRed";
 const char* password = "eslaclave";
 const char* host= "dweet.io";
 String sensor_name="donsensor_matera19"; // https://dweet.io/dweet/for/donsensor_matera19?estado
-
-
 /**
  * Setup - Configuracion de WIFI Local
  **/
 void setup() {
-  
   Serial.begin(9600);
-
   //Iniciar LED's y Relay-Bomba
   pinMode(rojo_pin, OUTPUT);
   pinMode(verde_pin, OUTPUT);
   pinMode(relay_pin, OUTPUT);
-
   digitalWrite(relay_pin, HIGH);
-  
   // Iniciar conexion WIFI
   Serial.println();
   Serial.println();
   Serial.print("Conectandose a  "); 
   Serial.println(ssid); 
-  
   // Conectarse a red WIFI LAN 
   WiFi.begin(ssid, password);   
   int intentos = 0; 
@@ -65,33 +53,25 @@ void setup() {
     } 
   Serial.println(F("Config lista"));
 }
-
-
 /**
  * Loop - Main del sensor
  **/
 void loop() {
-	
 	// Capturar datos
 	sensor_data = analogRead(sensor_pin);
 	int output_value = 0;
 	output_value = map(sensor_data,1024,500,0,100);
-
   arrayVariableValues[0] = output_value;
   arrayVariableNames[0] = "Humedad";
-
   // Verificar data
   if (isnan(sensor_data)) {
     Serial.println("Error de lectura en el sensor YL-69");
     return;
   }
-  
 	Serial.println("Nivel de humedad: ");
 	Serial.println(output_value);
 	Serial.println(" %");
-
   int lrojo=-1, lverde=-1;
-
   //Verificar
   if(output_value <= 50 ){
     digitalWrite(rojo_pin, HIGH);
